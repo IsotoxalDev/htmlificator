@@ -1,0 +1,13 @@
+[package]
+name = "htmlificator"
+version = "0.1.0"
+edition = "2021"
+authors = ["IsotoxalDev"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+textwrap = "0.16.0"
+
+[[example]]
+name = "sample_generator"
