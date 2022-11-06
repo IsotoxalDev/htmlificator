@@ -15,21 +15,36 @@ pub struct Element {
 }
 
 impl Element {
+    /// This function returns an empty element.
     pub fn new(name: &str, self_closing: bool) -> Self {
         Element {
             name: name.to_string(),
             self_closing,
             attributes: HashMap::new(),
-            children: vec!()
+            children: vec!(),
         }
     }
     
-    pub fn add_id(&mut self, id: &str) {
+    /// This function returns an element from the given data
+    pub fn from(name: &str, self_closing: bool, 
+        attributes: HashMap<String, String>,
+        children: Vec<HtmlData>) {
+        Element {
+            name: name.to_string(),
+            self_closing,
+            attributes,
+            children,
+        }
+    }
+    
+    /// Set the ID of the element.
+    pub fn set_id(&mut self, id: &str) {
         self.attributes.insert(
             String::from("id"), id.to_string(),
         );
     }
     
+    /// Add a class to the element.
     pub fn add_class(&mut self, class: &str) {
         match self.attributes.get("class") {
             Some (classes) => {
@@ -38,18 +53,26 @@ impl Element {
             None => self.attributes.insert(String::from("class"), class.to_string()),
         };
     }
+    
+    /// Add a child element to the element.
     pub fn add_element(&mut self, element: Element) {
         if self.self_closing {return}
         self.children.push(HtmlData::Element(element));
     }
+    
+    /// Add a comment inside the element.
     pub fn add_comment(&mut self, comment: &str) {
         if self.self_closing {return}
         self.children.push(HtmlData::Comment(comment.to_string()));
     }
+    
+    /// Add plain text inside teh element.
     pub fn add_text(&mut self, text: &str) {
         if self.self_closing {return}
         self.children.push(HtmlData::PlainText(text.to_string()));
     }
+    
+    /// Add an attribute to the element
     pub fn add_attribute(&mut self, attribute: &str, value: &str) {
         self.attributes.insert(
             attribute.to_string(), value.to_string(),
