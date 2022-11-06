@@ -28,7 +28,7 @@ impl Element {
     /// This function returns an element from the given data
     pub fn from(name: &str, self_closing: bool, 
         attributes: HashMap<String, String>,
-        children: Vec<HtmlData>) {
+        children: Vec<HtmlData>) -> Self {
         Element {
             name: name.to_string(),
             self_closing,
