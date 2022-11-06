@@ -1,4 +1,4 @@
-use htmlificator::*;
+use htmlificator::Element;
 
 fn main() {
     let mut el = Element::new("Div", false);
