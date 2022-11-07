@@ -1,6 +1,6 @@
 # Htmlificator
 
-This crate provides an element struch which can be displayed as HTML.
+This crate provides an element struct which can be displayed as HTML.
 
 ## License
 This crate is  licensed under the MIT license
@@ -11,7 +11,7 @@ This crate has used a snippet from the [TextWrap](https://crates.io/crates/textw
 ## Usage
 ```toml
 [dependencies]
-htmlificator = "0.2"
+htmlificator = "0.2.1"
 
 ```
 
