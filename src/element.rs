@@ -61,8 +61,8 @@ impl Element {
     }
     
     /// Append a vector of HTML data into the element
-    pub fn add_children(&mut self, children: Vec<HtmlData>) {
-        if self.closing {return}
+    pub fn add_children(&mut self, children: &mut Vec<HtmlData>) {
+        if self.self_closing {return}
         self.children.append(children);
     }
     
