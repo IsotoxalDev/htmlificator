@@ -60,6 +60,12 @@ impl Element {
         self.children.push(HtmlData::Element(element));
     }
     
+    /// Append a vector of HTML data into the element
+    pub fn add_children(&mut self, children: Vec<HtmlData>) {
+        if self.closing {return}
+        self.children.append(children);
+    }
+    
     /// Add a comment inside the element.
     pub fn add_comment(&mut self, comment: &str) {
         if self.self_closing {return}
@@ -92,12 +98,8 @@ impl Display for Element {
         else {
             let mut children = String::new();
             for child in &self.children {
-                let child_text = match child {
-                    HtmlData::Element(element) => format!("{}", element),
-                    HtmlData::Comment(text) => format!("<-- {} -->", text),
-                    HtmlData::PlainText(text) => text.to_string(),
-                };
-                children = format!("{}\n{}", children, indent(&child_text, "  "));
+                let text = format!("{}", child);
+                children = format!("{}\n{}", children, indent(&text, "  "));
             }
             write!(f, "<{}{}>{}\n</{}>", self.name, attributes, children, self.name)
         }
